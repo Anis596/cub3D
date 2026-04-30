@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tabcopy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/30 00:12:10 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/04/30 03:30:48 by lbardet-         ###   ########.fr       */
+/*   Created: 2026/04/30 04:46:57 by lbardet-          #+#    #+#             */
+/*   Updated: 2026/04/30 05:20:05 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	**ft_tabcopy(char **tab)
 {
-	t_data	*data;
+	char	**copy;
+	size_t	i;
 
-	if (ac != 2 || !checkmap_name(av[1]))
-		return (printf("Error: arguments"), 1);
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (0);
-	data->fd = open(av[1], O_RDONLY);
-	if (data->fd < 0)
-		return (free(data), 0);
-	parsing_map(data);
-	return (0);
+	if (!tab)
+		return (NULL);
+	copy = ft_calloc(ft_tablen((const char **)tab) + 1, sizeof(char *));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (tab[i])
+	{
+		copy[i] = ft_strdup(tab[i]);
+		if (!copy[i])
+		{
+			ft_freetab(copy);
+			return (NULL);
+		}
+		i++;
+	}
+	return (copy);
 }

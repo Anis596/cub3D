@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 05:24:48 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/02/23 21:41:38 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/04/30 05:18:43 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 int		ft_lstsize(t_list *lst);
 void	ft_freetab(char **tab);
 size_t	ft_tablen(const char **tab);
+char	**ft_tabcopy(char **tab);
 
 #endif
