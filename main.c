@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 00:12:10 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/04/30 03:30:48 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/02 09:22:37 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	main(int ac, char **av)
 	if (data->fd < 0)
 		return (free(data), 0);
 	parsing_map(data);
+	malloc_mlx(data);
 	return (0);
 }
