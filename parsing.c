@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 00:26:04 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/04/30 05:09:33 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/03 12:17:18 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int	checkmap_name(char *map)
 	return (1);
 }
 
-int	parsing_map(t_data *data)
+int	parsing_map(t_data *data, t_textures *textures)
 {
+	int	i;
+
+	i = 0;
+	(void)textures;
 	data->map = malloc(BUFFER_SIZE + 1);
 	if (!data->map)
 		exit(1);
@@ -36,28 +40,42 @@ int	parsing_map(t_data *data)
 		exit(1);
 	data->map[data->end] = 0;
 	data->parsed_map = ft_split(data->map, '\n');
+	while (data->parsed_map[i] && i < 6)
+	{
+		fill_struct(data, data->parsed_map[i]);
+		i++;
+	}
+	load_textures(textures, data);
+	data->parsed_map = extract_map(data->parsed_map);
 	if (!check_player(data) || !checkmandatories(data->parsed_map)
 		|| !is_close_map(data->parsed_map))
 		exit(1);
-	printf("Map parsed successfully\n");
 	return (1);
 }
 
 int	check_player(t_data *data)
 {
 	int	i;
+	int	j;
 	int	countcheck;
 
+	j = 0;
 	i = 0;
 	countcheck = 0;
-	if (!data->map)
+	if (!data->parsed_map)
 		return (0);
-	while (data->map[i])
+	while (data->parsed_map[j])
 	{
-		if (data->map[i] == 'E' || data->map[i] == 'W'
-			|| data->map[i] == 'S' || data->map[i] == 'N')
-			countcheck += 1;
-		i ++;
+		while (data->parsed_map[j][i])
+		{
+			if (data->parsed_map[j][i] == 'E' || data->parsed_map[j][i] == 'W'
+				|| data->parsed_map[j][i] == 'S'
+				|| data->parsed_map[j][i] == 'N')
+				countcheck += 1;
+			i ++;
+		}
+		i = 0;
+		j++;
 	}
 	if (countcheck == 1)
 		return (1);

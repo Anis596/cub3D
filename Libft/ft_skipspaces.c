@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_skipspaces.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 08:12:43 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/03 09:16:40 by lbardet-         ###   ########.fr       */
+/*   Created: 2026/05/03 08:58:31 by lbardet-          #+#    #+#             */
+/*   Updated: 2026/05/03 08:58:41 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	skip_space(char *line, int i)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
+	while (line[i] == ' ')
+		i++;
+	return (i);
 }
-
-// int	main(void)
-// {
-// 	const char	str[] = "             Bonjour";
-// 	int			c = ' ';
-// 	printf("%s\n", ft_strchr(str, c));
-// 	return (0);
-// }

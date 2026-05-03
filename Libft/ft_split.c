@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 07:17:02 by lbardet-          #+#    #+#             */
-/*   Updated: 2025/10/17 20:11:32 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/03 09:16:50 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,20 @@ char	**ft_split(char const *s, char c)
 // {
 // 	char **tab;
 // 	int i = 0;
-// 	tab = ft_split("hello!", ' ');
+// 	tab = ft_split("    hello!  \n\n    \n   \nas     dasd\nsadfsdf\n\n", '\n');
+// 	while (tab[i])
+// 	{
+// 		printf("%s\n", tab[i]);
+// 		i++;
+// 	}
+// 	printf("----\n");
+// 	i = 0;
+// 	while (tab[i])
+// 	{
+// 		tab[i] = ft_split(tab[i], ' ');
+// 		i++;
+// 	}
+// 	i = 0;
 // 	while (tab[i])
 // 	{
 // 		printf("%s\n", tab[i]);

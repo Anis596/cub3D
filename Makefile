@@ -1,10 +1,12 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L./minilibx-linux -lmlx -lX11 -lXext -lXfixes -lXrandr
+CFLAGS = -Wall -Wextra -Werror -g 
 
-SRCS = main.c parsing.c floodfill.c textures.c
+MLX_DIR = ./minilibx-linux
+MLX = -L$(MLX_DIR) -lmlx -lX11 -lXext -lXfixes -lXrandr
+
+SRCS = main.c parsing.c parsing2.c floodfill.c textures.c utils.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = Libft
@@ -14,7 +16,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)  # Utiliser $(LDFLAGS) pour le linking
+	$(MAKE) -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
