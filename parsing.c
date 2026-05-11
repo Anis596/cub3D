@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 00:26:04 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/03 12:17:18 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/11 07:57:34 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	checkmap_name(char *map)
 	return (1);
 }
 
-int	parsing_map(t_data *data, t_textures *textures)
+int	parsing_map(t_data *data, t_textures *textures, t_player *player)
 {
 	int	i;
 
@@ -45,23 +45,22 @@ int	parsing_map(t_data *data, t_textures *textures)
 		fill_struct(data, data->parsed_map[i]);
 		i++;
 	}
-	load_textures(textures, data);
+	// load_textures(textures, data);
 	data->parsed_map = extract_map(data->parsed_map);
-	if (!check_player(data) || !checkmandatories(data->parsed_map)
+	if (!check_player(data, player) || !checkmandatories(data->parsed_map)
 		|| !is_close_map(data->parsed_map))
 		exit(1);
 	return (1);
 }
 
-int	check_player(t_data *data)
+int	check_player(t_data *data, t_player *player)
 {
 	int	i;
 	int	j;
-	int	countcheck;
 
 	j = 0;
 	i = 0;
-	countcheck = 0;
+	data->countcheck = 0;
 	if (!data->parsed_map)
 		return (0);
 	while (data->parsed_map[j])
@@ -71,13 +70,13 @@ int	check_player(t_data *data)
 			if (data->parsed_map[j][i] == 'E' || data->parsed_map[j][i] == 'W'
 				|| data->parsed_map[j][i] == 'S'
 				|| data->parsed_map[j][i] == 'N')
-				countcheck += 1;
+				data->countcheck = player_init(data, player, i, j);
 			i ++;
 		}
 		i = 0;
 		j++;
 	}
-	if (countcheck == 1)
+	if (data->countcheck == 1)
 		return (1);
 	return (0);
 }

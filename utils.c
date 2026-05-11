@@ -5,18 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 10:05:33 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/03 11:30:51 by lbardet-         ###   ########.fr       */
+/*   Created: 2026/05/11 06:55:16 by lbardet-          #+#    #+#             */
+/*   Updated: 2026/05/11 06:57:08 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	malloc_everything(t_textures *textures, t_data *data)
+int	rgb_to_int(t_rgb color)
 {
-	textures = malloc(sizeof(t_textures));
-	data = malloc(sizeof(t_data));
-	data->mlx = mlx_init();
-	if (!data->mlx || !textures || !data)
-		exit(1);
+	return ((color.r << 16) | (color.g << 8) | color.b);
 }
