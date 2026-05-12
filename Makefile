@@ -1,13 +1,15 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror -g
 
 MLX_DIR = ./minilibx-linux
-MLX = -L$(MLX_DIR) -lmlx -lX11 -lXext -lXfixes -lXrandr
+MLX = -L$(MLX_DIR) -lmlx -lX11 -lXext -lXfixes -lXrandr -lm
 
 SRCS = main.c parsing.c parsing2.c floodfill.c textures.c utils.c \
-		mlx.c raycasting.c player.c raycasting_utils.c
+		mlx.c raycasting.c player.c raycasting_utils.c \
+		movements.c movements2.c textures2.c
+
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = Libft

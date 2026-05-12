@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 00:26:04 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/11 07:57:34 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:28:16 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parsing_map(t_data *data, t_textures *textures, t_player *player)
 		fill_struct(data, data->parsed_map[i]);
 		i++;
 	}
-	// load_textures(textures, data);
+	load_textures(textures, data);
 	data->parsed_map = extract_map(data->parsed_map);
 	if (!check_player(data, player) || !checkmandatories(data->parsed_map)
 		|| !is_close_map(data->parsed_map))

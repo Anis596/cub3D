@@ -6,15 +6,14 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 11:06:14 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/11 05:12:10 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:52:07 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	load_textures_no(t_textures *textures, t_data *data, char *line)
+static void	load_textures_no(t_textures *textures, t_data *data)
 {
-	data->no = skip_to_path(line);
 	textures->no.img = mlx_xpm_file_to_image(data->mlx, data->no,
 			&textures->no.width, &textures->no.height);
 	if (!textures->no.img)
@@ -25,9 +24,8 @@ static void	load_textures_no(t_textures *textures, t_data *data, char *line)
 		exit(1);
 }
 
-static void	load_textures_so(t_textures *textures, t_data *data, char *line)
+static void	load_textures_so(t_textures *textures, t_data *data)
 {
-	data->so = skip_to_path(line);
 	textures->so.img = mlx_xpm_file_to_image(data->mlx, data->so,
 			&textures->so.width, &textures->so.height);
 	if (!textures->so.img)
@@ -38,9 +36,8 @@ static void	load_textures_so(t_textures *textures, t_data *data, char *line)
 		exit(1);
 }
 
-static void	load_textures_ea(t_textures *textures, t_data *data, char *line)
+static void	load_textures_ea(t_textures *textures, t_data *data)
 {
-	data->ea = skip_to_path(line);
 	textures->ea.img = mlx_xpm_file_to_image(data->mlx, data->ea,
 			&textures->ea.width, &textures->ea.height);
 	if (!textures->ea.img)
@@ -51,9 +48,8 @@ static void	load_textures_ea(t_textures *textures, t_data *data, char *line)
 		exit(1);
 }
 
-static void	load_textures_we(t_textures *textures, t_data *data, char *line)
+static void	load_textures_we(t_textures *textures, t_data *data)
 {
-	data->we = skip_to_path(line);
 	textures->we.img = mlx_xpm_file_to_image(data->mlx, data->we,
 			&textures->we.width, &textures->we.height);
 	if (!textures->we.img)
@@ -66,8 +62,8 @@ static void	load_textures_we(t_textures *textures, t_data *data, char *line)
 
 void	load_textures(t_textures *textures, t_data *data)
 {
-	load_textures_no(textures, data, data->no);
-	load_textures_so(textures, data, data->so);
-	load_textures_ea(textures, data, data->ea);
-	load_textures_we(textures, data, data->we);
+	load_textures_no(textures, data);
+	load_textures_so(textures, data);
+	load_textures_ea(textures, data);
+	load_textures_we(textures, data);
 }

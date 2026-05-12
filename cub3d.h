@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 00:12:04 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/11 08:20:02 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:20:23 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,25 +87,27 @@ typedef struct s_textures
 
 typedef struct s_data
 {
-	t_rgb	floor;
-	t_rgb	ceiling;
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	char	*map;
-	char	**parsed_map;
-	int		line_len;
-	int		bpp;
-	int		endian;
-	int		fd;
-	int		line_h;
-	int		countcheck;
-	size_t	end;
+	t_rgb		floor;
+	t_rgb		ceiling;
+	t_player	player;
+	t_textures	textures;
+	char		*no;
+	char		*so;
+	char		*ea;
+	char		*we;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	char		*map;
+	char		**parsed_map;
+	int			line_len;
+	int			bpp;
+	int			endian;
+	int			fd;
+	int			line_h;
+	int			countcheck;
+	size_t		end;
 }	t_data;
 
 int		checkmap_name(char *map);
@@ -136,13 +138,19 @@ void	draw_column(t_data *d, int x, int line_h, t_rgb color);
 void	render_column(t_player *player, t_data *d, int x);
 void	raycast(t_player *player, t_data *data);
 void	clear_image(t_data *data);
-int		key_hook(int keycode, t_data *data, t_player *player);
+int		key_hook(int keycode, t_data *data);
 void	move_forward(t_player *player, t_data *d);
 void	move_backward(t_player *player, t_data *d);
 void	move_left(t_player *player, t_data *d);
 void	move_right(t_player *player, t_data *d);
-void	rotate_left(t_data *d, t_player *player);
-void	rotate_right(t_data *d, t_player *player);
+void	rotate_left(t_player *player);
+void	rotate_right(t_player *player);
 int		close_window(t_data *data);
+t_walls	*select_texture(t_ray *r, t_textures *tex);
+double	get_wall_x(t_player *p, t_ray *r, double perp_dist);
+unsigned int	get_texture_pixel(t_walls *tex, int x, int y);
+void	draw_texture_column(t_data *d, t_walls *tex,
+	int x, int line_h, int tex_x);
+void	put_pixel_color(t_data *data, int x, int y, unsigned int color);
 
 #endif
