@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 00:26:11 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/12 13:36:54 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/20 21:00:15 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_rgb	stock_rgb(char *line)
 	rgb.b = ft_atoi(line);
 	if (rgb.r < 0 || rgb.r > 255 || rgb.g < 0 || rgb.g > 255
 		|| rgb.b < 0 || rgb.b > 255)
-		exit(1);
+		printf("Error: Invalid RGB color\n"), exit(1);
 	return (rgb);
 }
 

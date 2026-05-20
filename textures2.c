@@ -47,31 +47,38 @@ unsigned int	get_texture_pixel(t_walls *tex, int x, int y)
 	dst = tex->addr
 		+ (y * tex->line_len)
 		+ (x * (tex->bpp / 8));
+	if (x < 0 || y < 0 || x >= tex->width || y >= tex->height)
+		return 0;
 	return (*(unsigned int *)dst);
 }
 
 void	draw_texture_column(t_data *d, t_walls *tex,
 	int x, int line_h, int tex_x)
 {
-	int				y;
 	int				start;
 	int				end;
 	int				tex_y;
 	unsigned int	color;
+	int				tex_h;
 
+	tex_h = tex->height;
 	start = -line_h / 2 + HEIGHT / 2;
 	end = line_h / 2 + HEIGHT / 2;
 	if (start < 0)
 		start = 0;
 	if (end >= HEIGHT)
 		end = HEIGHT - 1;
-	y = start;
-	while (y < end)
+	d->y = start;
+	while (d->y < end)
 	{
-		tex_y = (y - start) * tex->height / line_h;
+		tex_y = ((d->y - start) * tex_h) / line_h;
+		if (tex_y < 0)
+			tex_y = 0;
+		if (tex_y >= tex_h)
+			tex_y = tex_h - 1;
 		color = get_texture_pixel(tex, tex_x, tex_y);
-		put_pixel_color(d, x, y, color);
-		y++;
+		put_pixel_color(d, x, d->y, color);
+		d->y++;
 	}
 }
 

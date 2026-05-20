@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 10:05:33 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/11 07:57:51 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/20 20:20:17 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	put_pixel(t_data *data, int x, int y, t_rgb color)
 
 void	clear_image(t_data *data)
 {
-	int	size;
-
-	size = HEIGHT * WIDTH * (data->bpp / 8);
-	ft_memset(data->addr, 0, (size_t)size);
+	ft_memset(data->addr, 0,
+		HEIGHT * data->line_len);
 }

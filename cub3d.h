@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 00:12:04 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/12 13:20:23 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/20 20:59:25 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_data
 	int			fd;
 	int			line_h;
 	int			countcheck;
+	int			y;
 	size_t		end;
 }	t_data;
 
@@ -138,7 +139,7 @@ void	draw_column(t_data *d, int x, int line_h, t_rgb color);
 void	render_column(t_player *player, t_data *d, int x);
 void	raycast(t_player *player, t_data *data);
 void	clear_image(t_data *data);
-int		key_hook(int keycode, t_data *data);
+int		key_hook(int keycode, void *param);
 void	move_forward(t_player *player, t_data *d);
 void	move_backward(t_player *player, t_data *d);
 void	move_left(t_player *player, t_data *d);
@@ -152,5 +153,16 @@ unsigned int	get_texture_pixel(t_walls *tex, int x, int y);
 void	draw_texture_column(t_data *d, t_walls *tex,
 	int x, int line_h, int tex_x);
 void	put_pixel_color(t_data *data, int x, int y, unsigned int color);
+double	get_distance(t_ray *r);
+void	perp_dist_line_height(double perp_dist, int *line_h);
+void	clean_exit(t_data *data);
+void	clean_exit_error(t_data *data, int code, char *message);
+void	clean_exit_minimal(t_data *data, t_textures *textures, int code, char *message);
+void	clean_exit_with_textures(t_data *data, t_textures *textures);
+void	free_mlx_ptr(t_data *data);
+void	free_parsed_map(char **parsed_map);
+void	free_textures(t_data *data);
+void	free_strings(t_data *data);
+void	free_mlx(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lbardet- <lbardet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 00:26:04 by lbardet-          #+#    #+#             */
-/*   Updated: 2026/05/12 13:28:16 by lbardet-         ###   ########.fr       */
+/*   Updated: 2026/05/20 20:54:15 by lbardet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	parsing_map(t_data *data, t_textures *textures, t_player *player)
 	(void)textures;
 	data->map = malloc(BUFFER_SIZE + 1);
 	if (!data->map)
-		exit(1);
+		clean_exit_error(data, 1, "Memory allocation for map failed");
 	data->end = read(data->fd, data->map, BUFFER_SIZE);
 	if (data->end <= 0)
-		exit(1);
+		clean_exit_error(data, 1, "Cannot read map file");
 	data->map[data->end] = 0;
 	data->parsed_map = ft_split(data->map, '\n');
 	while (data->parsed_map[i] && i < 6)
@@ -49,7 +49,7 @@ int	parsing_map(t_data *data, t_textures *textures, t_player *player)
 	data->parsed_map = extract_map(data->parsed_map);
 	if (!check_player(data, player) || !checkmandatories(data->parsed_map)
 		|| !is_close_map(data->parsed_map))
-		exit(1);
+		clean_exit_error(data, 1, "Invalid map");
 	return (1);
 }
 

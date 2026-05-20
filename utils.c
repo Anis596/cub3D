@@ -19,10 +19,6 @@ int	rgb_to_int(t_rgb color)
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	exit(0);
+	clean_exit(data);
 	return (0);
 }
